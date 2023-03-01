@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Access/Access.csproj", "Access/"]
-RUN dotnet restore "Access/Access.csproj"
+COPY ["Person/Person.csproj", "Person/"]
+RUN dotnet restore "Person/Person.csproj"
 COPY . .
-WORKDIR "/src/Access"
-RUN dotnet build "Access.csproj" -c Release -o /app/build
+WORKDIR "/src/Person"
+RUN dotnet build "Person.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Access.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Person.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Access.dll"]
+ENTRYPOINT ["dotnet", "Person.dll"]
