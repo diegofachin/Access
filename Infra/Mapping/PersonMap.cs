@@ -25,7 +25,7 @@ public class PersonMap : IEntityTypeConfiguration<PersonEntity>
 
         builder
             .Property(user => user.DateOfBirth)
-            .HasColumnType("datetime2")
+            .HasColumnType("Date")
             .IsRequired();
 
         builder
