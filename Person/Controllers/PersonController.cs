@@ -33,7 +33,7 @@ public class PersonController : ControllerBase
     [ProducesResponseType((201))]
     [ProducesResponseType(400)]
     [ProducesResponseType(401)]
-    public async Task<ActionResult<AuthenticatePersonResponseDto>> Authenticate([FromQuery] string cpf, [FromQuery] string password)
+    public async Task<ActionResult<bool?>> Authenticate([FromQuery] string cpf, [FromQuery] string password)
     {
         var authenticateRequestDto = new AuthenticatePersonRequestDto()
         {
@@ -43,7 +43,7 @@ public class PersonController : ControllerBase
 
         var result = await _mediator.Send(authenticateRequestDto);
 
-        return result is not null
+        return result.HasValue
             ? Ok(result)
             : BadRequest();
     }

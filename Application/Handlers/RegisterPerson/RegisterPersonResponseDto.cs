@@ -9,5 +9,5 @@ namespace Application.Handlers.RegisterPerson;
 
 public class RegisterPersonResponseDto 
 {
-    public Guid PersonId { get; set; }
+    public string Cpf { get; set; }
 }

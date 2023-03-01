@@ -1,4 +1,5 @@
 ﻿using Application.Behaviors;
+using Application.Handlers.AuthenticatePerson;
 using Application.Handlers.RegisterPerson;
 using Application.Validators;
 using FluentValidation;
@@ -21,6 +22,7 @@ public static class IoC
     {
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddScoped<IValidator<RegisterPersonRequestDto>, RegisterPersonValidator>();
+        services.AddScoped<IValidator<AuthenticatePersonRequestDto>, AuthenticatePersonValidator>();
 
         return services;
     }

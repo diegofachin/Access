@@ -2,7 +2,7 @@
 
 namespace Application.Handlers.AuthenticatePerson;
 
-public class AuthenticatePersonRequestDto : IRequest<AuthenticatePersonResponseDto>
+public class AuthenticatePersonRequestDto : IRequest<bool?>
 {
     public string Cpf { get; set; }
 
