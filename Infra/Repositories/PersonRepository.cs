@@ -1,4 +1,5 @@
 ﻿using Application.Enums;
+using BCrypt.Net;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infra.Context;
@@ -15,11 +16,10 @@ public class PersonRepository : GenericRepository<PersonEntity>, IPersonReposito
 
     public async Task<bool> AuthenticatePerson(string cpf, string password)
     {
-        var authenticate = await _context.Persons.FirstOrDefaultAsync(x => x.Cpf == cpf && x.Password == password);
-
-        if (authenticate == null)
+        var person = await _context.Persons.FirstOrDefaultAsync(x => x.Cpf == cpf);
+        if (person == null)
             return false;
 
-        return true;
+        return BCrypt.Net.BCrypt.Verify(password, person.Password);
     }
 }

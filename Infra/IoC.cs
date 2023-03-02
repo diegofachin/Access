@@ -14,7 +14,7 @@ public static class IoC
         services.AddRepository();
 
         services.AddDbContext<PersonDbContext>(opt => opt
-            .UseSqlServer(configuration.GetConnectionString("PersonConnection")));        
+            .UseSqlServer(configuration.GetConnectionString("PersonConnection"), option => option.EnableRetryOnFailure()));        
 
         return services;
     }

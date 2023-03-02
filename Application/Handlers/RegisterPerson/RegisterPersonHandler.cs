@@ -27,7 +27,7 @@ public class RegisterPersonHandler : IRequestHandler<RegisterPersonRequestDto, R
             Address = request.Address,
             AddressNumber = request.AddressNumber,
             Complement = request.Complement,
-            Password = request.Password,
+            Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
         };
 
         await _unitOfWork.PersonRepository.Add(person);

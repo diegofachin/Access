@@ -16,7 +16,7 @@ public class PersonController : ControllerBase
         _mediator = mediator;
     }
     
-    [HttpPost("register")]
+    [HttpPost]
     [ProducesResponseType((201))]
     [ProducesResponseType(400)]
     [ProducesResponseType(401)]

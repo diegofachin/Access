@@ -25,7 +25,7 @@ public class RegisterPersonValidator : AbstractValidator<RegisterPersonRequestDt
             .LessThan(request => DateTime.Now);
 
         RuleFor(request => request.Gender)
-            .NotEmpty();
+            .IsInEnum();
 
         RuleFor(request => request.Address)
             .NotEmpty()
