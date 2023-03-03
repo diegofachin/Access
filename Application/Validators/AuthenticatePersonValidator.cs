@@ -17,8 +17,7 @@ public class AuthenticatePersonValidator : AbstractValidator<AuthenticatePersonR
     public AuthenticatePersonValidator()
     {
         RuleFor(request => request.Cpf)
-           .NotEmpty()
-           .Must(CpfValidator.Validate);
+           .NotEmpty();
 
         RuleFor(request => request.Password)
             .NotEmpty();

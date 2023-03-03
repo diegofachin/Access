@@ -12,21 +12,21 @@ namespace PersonTest.Person.Controllers;
 
 public class PersonControllerTest : IDisposable
 {
-    protected readonly Fixture fixture;
-    protected readonly Mock<IMediator> mediatorMock;
-    protected readonly PersonController personController;
+    protected readonly Fixture Fixture;
+    protected readonly Mock<IMediator> MediatorMock;
+    protected readonly PersonController PersonController;
 
     public PersonControllerTest()
     {
-        mediatorMock = new();
-        fixture = new Fixture();
+        MediatorMock = new();
+        Fixture = new Fixture();
 
-        personController = new PersonController(mediatorMock.Object);
+        PersonController = new PersonController(MediatorMock.Object);
     }
 
     public void Dispose()
     {
-        mediatorMock.Reset();
+        MediatorMock.Reset();
 
         GC.SuppressFinalize(this);
     }
@@ -34,14 +34,14 @@ public class PersonControllerTest : IDisposable
     [Fact]
     public async Task RegisterPerson_WithSuccess_WhenReturnCreated()
     {
-        var request = fixture.Create<RegisterPersonRequestDto>();
-        var response = fixture.Create<RegisterPersonResponseDto>();
+        var request = Fixture.Create<RegisterPersonRequestDto>();
+        var response = Fixture.Create<RegisterPersonResponseDto>();
 
-        mediatorMock.Setup(
+        MediatorMock.Setup(
             mock => mock.Send(It.IsAny<RegisterPersonRequestDto>(), It.IsAny<CancellationToken>())
         ).ReturnsAsync(response);
 
-        var result = await personController.RegisterAsync(request) as ObjectResult;
+        var result = await PersonController.RegisterAsync(request) as ObjectResult;
 
         result.StatusCode.Should().Be((int)HttpStatusCode.OK);
     }
@@ -49,14 +49,14 @@ public class PersonControllerTest : IDisposable
     [Fact]
     public async Task DontRegisterPerson_WithBadRequest_WhenReturnNull()
     {
-        var request = fixture.Create<RegisterPersonRequestDto>();
+        var request = Fixture.Create<RegisterPersonRequestDto>();
         RegisterPersonResponseDto? response = null;
 
-        mediatorMock.Setup(
+        MediatorMock.Setup(
             mock => mock.Send(It.IsAny<RegisterPersonRequestDto>(), It.IsAny<CancellationToken>())
         ).ReturnsAsync(response);
 
-        var result = await personController.RegisterAsync(request) as BadRequestResult;
+        var result = await PersonController.RegisterAsync(request) as BadRequestResult;
 
         result.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
     }
@@ -64,13 +64,28 @@ public class PersonControllerTest : IDisposable
     [Fact]
     public async Task AuthenticatePerson_WithSuccess_WhenReturnCreated()
     {
-        var request = fixture.Create<AuthenticatePersonRequestDto>();
+        var request = Fixture.Create<AuthenticatePersonRequestDto>();
 
-        mediatorMock.Setup(
+        MediatorMock.Setup(
             mock => mock.Send(It.IsAny<AuthenticatePersonRequestDto>(), It.IsAny<CancellationToken>())
         ).ReturnsAsync(true);
 
-        var result = await personController.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>());
+        var result = await PersonController.AuthenticateAsync(request) as OkResult;
 
+        result.StatusCode.Should().Be((int)HttpStatusCode.OK);
+    }
+
+    [Fact]
+    public async Task DontAuthenticatePerson_WithSuccess_WhenReturnUnauthorized()
+    {
+        var request = Fixture.Create<AuthenticatePersonRequestDto>();
+
+        MediatorMock.Setup(
+            mock => mock.Send(It.IsAny<AuthenticatePersonRequestDto>(), It.IsAny<CancellationToken>())
+        ).ReturnsAsync(false);
+
+        var result = await PersonController.AuthenticateAsync(request) as UnauthorizedResult;
+
+        result.StatusCode.Should().Be((int)HttpStatusCode.Unauthorized);
     }
 }

@@ -29,22 +29,16 @@ public class PersonController : ControllerBase
             : BadRequest();
     }
 
-    [HttpGet("authenticate")]
+    [HttpPost("authenticate")]
     [ProducesResponseType((201))]
     [ProducesResponseType(400)]
     [ProducesResponseType(401)]
-    public async Task<ActionResult<bool?>> AuthenticateAsync([FromQuery] string cpf, [FromQuery] string password)
+    public async Task<IActionResult> AuthenticateAsync([FromBody] AuthenticatePersonRequestDto authenticateRequestDto)
     {
-        var authenticateRequestDto = new AuthenticatePersonRequestDto()
-        {
-            Cpf = cpf,
-            Password = password
-        };
-
         var result = await _mediator.Send(authenticateRequestDto);
 
-        return result.HasValue
-            ? Ok(result)
-            : BadRequest();
+        return result.HasValue && result.Value
+            ? Ok()
+            : Unauthorized();
     }
 }
