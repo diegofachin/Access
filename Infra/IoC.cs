@@ -4,9 +4,11 @@ using Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infra;
 
+[ExcludeFromCodeCoverage]
 public static class IoC
 {
     public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration configuration)

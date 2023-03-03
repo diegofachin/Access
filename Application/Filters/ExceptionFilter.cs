@@ -1,9 +1,12 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
 namespace Application.Filters;
+
+[ExcludeFromCodeCoverage]
 public class ExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)

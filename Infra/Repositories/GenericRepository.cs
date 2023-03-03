@@ -1,9 +1,11 @@
 ﻿using Domain.Interfaces;
 using Infra.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infra.Repositories;
 
+[ExcludeFromCodeCoverage]
 public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     protected readonly PersonDbContext _context;

@@ -6,9 +6,11 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Application;
 
+[ExcludeFromCodeCoverage]
 public static class IoC
 {
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)

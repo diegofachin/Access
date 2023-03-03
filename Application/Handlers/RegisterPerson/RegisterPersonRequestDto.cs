@@ -1,9 +1,11 @@
 ﻿using Application.Enums;
 using MediatR;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Application.Handlers.RegisterPerson;
 
+[ExcludeFromCodeCoverage]
 public class RegisterPersonRequestDto : IRequest<RegisterPersonResponseDto>
 {
     public string Name { get; set; }

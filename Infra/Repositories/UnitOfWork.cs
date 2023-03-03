@@ -1,8 +1,10 @@
 ﻿using Domain.Interfaces;
 using Infra.Context;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infra.Repositories;
 
+[ExcludeFromCodeCoverage]
 public class UnitOfWork : IUnitOfWork
 {
     private readonly PersonDbContext _context;

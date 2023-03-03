@@ -20,7 +20,7 @@ public class PersonController : ControllerBase
     [ProducesResponseType((201))]
     [ProducesResponseType(400)]
     [ProducesResponseType(401)]
-    public async Task<ActionResult<RegisterPersonResponseDto>> Register([FromBody] RegisterPersonRequestDto registerUserRequestDto)
+    public async Task<IActionResult> RegisterAsync([FromBody] RegisterPersonRequestDto registerUserRequestDto)
     {
         var result = await _mediator.Send(registerUserRequestDto);
 
@@ -33,7 +33,7 @@ public class PersonController : ControllerBase
     [ProducesResponseType((201))]
     [ProducesResponseType(400)]
     [ProducesResponseType(401)]
-    public async Task<ActionResult<bool?>> Authenticate([FromQuery] string cpf, [FromQuery] string password)
+    public async Task<ActionResult<bool?>> AuthenticateAsync([FromQuery] string cpf, [FromQuery] string password)
     {
         var authenticateRequestDto = new AuthenticatePersonRequestDto()
         {

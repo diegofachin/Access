@@ -1,8 +1,10 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infra.Context;
 
+[ExcludeFromCodeCoverage]
 public class PersonDbContext : DbContext
 {
     public PersonDbContext(DbContextOptions<PersonDbContext> options) : base(options)
