@@ -1,4 +1,5 @@
 ﻿using Application.Behaviors;
+using Application.Handlers.AddCreditCard;
 using Application.Handlers.AuthenticatePerson;
 using Application.Handlers.RegisterPerson;
 using Application.Validators;
@@ -25,6 +26,7 @@ public static class IoC
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddScoped<IValidator<RegisterPersonRequestDto>, RegisterPersonValidator>();
         services.AddScoped<IValidator<AuthenticatePersonRequestDto>, AuthenticatePersonValidator>();
+        services.AddScoped<IValidator<AddCreditCardRequestDto>, AddCreditCardValidator>();
 
         return services;
     }

@@ -33,7 +33,7 @@ public class CpfValidatorTest : IDisposable
     }
 
     [Fact]
-    public async Task ValidateCPF_WithInvalid_WhenReturnTrue()
+    public void ValidateCPF_WithInvalid_WhenReturnTrue()
     {
         var result = CpfValidator.Validate("07140933944");
 
@@ -41,7 +41,7 @@ public class CpfValidatorTest : IDisposable
     }
 
     [Fact]
-    public async Task ValidateCPF_WithValid_WhenReturnFalse()
+    public void ValidateCPF_WithValid_WhenReturnFalse()
     {
         var result = CpfValidator.Validate(Faker.Random.AlphaNumeric(10));
 

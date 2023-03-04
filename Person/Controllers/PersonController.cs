@@ -1,4 +1,5 @@
-﻿using Application.Handlers.AuthenticatePerson;
+﻿using Application.Handlers.AddCreditCard;
+using Application.Handlers.AuthenticatePerson;
 using Application.Handlers.RegisterPerson;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -40,5 +41,18 @@ public class PersonController : ControllerBase
         return result.HasValue && result.Value
             ? Ok()
             : Unauthorized();
+    }
+
+    [HttpPost("creditcard")]
+    [ProducesResponseType((201))]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(401)]
+    public async Task<IActionResult> AddCreditCardAsync([FromBody] AddCreditCardRequestDto addCreditCardRequestDto)
+    {
+        var result = await _mediator.Send(addCreditCardRequestDto);
+
+        return result is not null
+            ? Ok(result)
+            : BadRequest();
     }
 }

@@ -3,14 +3,7 @@ using AutoFixture;
 using Domain.Entities;
 using Domain.Interfaces;
 using FluentAssertions;
-using MediatR;
 using Moq;
-using Person.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PersonTest.Application.Handlers.RegisterPerson;
 
@@ -43,24 +36,24 @@ public class RegisterPersonHandlerTest : IDisposable
     [Fact]
     public async Task RegisterPersonHandler_WithSuccess_WhenReturnCreated()
     {
-        var person = fixture.Create<RegisterPersonRequestDto>();
+        var request = fixture.Create<RegisterPersonRequestDto>();
 
-        var result = await RegisterPersonHandler.Handle(person, CancellationToken.None);
+        var result = await RegisterPersonHandler.Handle(request, CancellationToken.None);
 
         PersonRepositoryMock.Verify(m => m.Add(It.IsAny<PersonEntity>()), Times.Once);
         UnitOfWorkMock.Verify(m => m.Commit(), Times.Once);
 
-        result.Cpf.Should().Be(person.Cpf);
+        result.Id.Should().NotBeEmpty();
     }
 
     [Fact]
     public async Task DontRegisterPersonHandler_WithSuccess_WhenReturnError()
     {
-        var person = fixture.Create<RegisterPersonRequestDto>();
+        var request = fixture.Create<RegisterPersonRequestDto>();
 
         UnitOfWorkMock.Setup(m => m.Commit()).Throws(new Exception());
 
-        Func<Task> action = async () => await RegisterPersonHandler.Handle(person, CancellationToken.None);
+        Func<Task> action = async () => await RegisterPersonHandler.Handle(request, CancellationToken.None);
 
         await action.Should().ThrowAsync<Exception>();
 

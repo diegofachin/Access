@@ -1,4 +1,5 @@
-﻿using Application.Handlers.AuthenticatePerson;
+﻿using Application.Handlers.AddCreditCard;
+using Application.Handlers.AuthenticatePerson;
 using Application.Handlers.RegisterPerson;
 using AutoFixture;
 using FluentAssertions;
@@ -87,5 +88,35 @@ public class PersonControllerTest : IDisposable
         var result = await PersonController.AuthenticateAsync(request) as UnauthorizedResult;
 
         result.StatusCode.Should().Be((int)HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task AddCreditCard_WithSuccess_WhenReturnCreated()
+    {
+        var request = Fixture.Create<AddCreditCardRequestDto>();
+        var response = Fixture.Create<AddCreditCardResponseDto>();
+
+        MediatorMock.Setup(
+            mock => mock.Send(It.IsAny<AddCreditCardRequestDto>(), It.IsAny<CancellationToken>())
+        ).ReturnsAsync(response);
+
+        var result = await PersonController.AddCreditCardAsync(request) as ObjectResult;
+
+        result.StatusCode.Should().Be((int)HttpStatusCode.OK);
+    }
+
+    [Fact]
+    public async Task DontAddCreditCard_WithBadRequest_WhenReturnNull()
+    {
+        var request = Fixture.Create<AddCreditCardRequestDto>();
+        AddCreditCardResponseDto? response = null;
+
+        MediatorMock.Setup(
+            mock => mock.Send(It.IsAny<AddCreditCardRequestDto>(), It.IsAny<CancellationToken>())
+        ).ReturnsAsync(response);
+
+        var result = await PersonController.AddCreditCardAsync(request) as BadRequestResult;
+
+        result.StatusCode.Should().Be((int)HttpStatusCode.BadRequest);
     }
 }

@@ -9,11 +9,14 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly PersonDbContext _context;
     public IPersonRepository PersonRepository { get; }
-    
-    public UnitOfWork(PersonDbContext context, IPersonRepository personRepository)
+
+    public ICreditCardRepository CreditCardRepository { get; }
+
+    public UnitOfWork(PersonDbContext context, IPersonRepository personRepository, ICreditCardRepository creditCardRepository)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         PersonRepository = personRepository ?? throw new ArgumentNullException(nameof(personRepository));
+        CreditCardRepository = creditCardRepository;
     }
 
     public int Commit()

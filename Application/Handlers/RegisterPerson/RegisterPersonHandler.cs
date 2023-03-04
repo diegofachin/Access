@@ -35,7 +35,7 @@ public class RegisterPersonHandler : IRequestHandler<RegisterPersonRequestDto, R
 
         return new RegisterPersonResponseDto()
         {
-            Cpf = person.Cpf
+            Id = person.Id
         };
     }
 }
