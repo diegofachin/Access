@@ -48,7 +48,7 @@ public class PersonControllerTest : IDisposable
     }
 
     [Fact]
-    public async Task DontRegisterPerson_ReturnError_WhenResponseIsNull()
+    public async Task RegisterPerson_ReturnError_WhenResponseIsNull()
     {
         var request = Fixture.Create<RegisterPersonRequestDto>();
         RegisterPersonResponseDto? response = null;
