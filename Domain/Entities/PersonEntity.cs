@@ -1,8 +1,10 @@
 ﻿using Application.Enums;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Entities;
 
+[ExcludeFromCodeCoverage]
 public class PersonEntity : BaseEntity
 {
     public string Name { get; set; }

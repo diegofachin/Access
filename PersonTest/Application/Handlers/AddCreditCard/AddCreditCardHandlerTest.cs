@@ -34,7 +34,7 @@ public class AddCreditCardHandlerTest : IDisposable
     }
 
     [Fact]
-    public async Task AddCreditCardHandler_WithSuccess_WhenReturnCreated()
+    public async Task AddCreditCardHandler_ReturnCreated_WhenSuccess()
     {
         var request = fixture.Create<AddCreditCardRequestDto>();
 
@@ -47,7 +47,7 @@ public class AddCreditCardHandlerTest : IDisposable
     }
 
     [Fact]
-    public async Task DontAddCreditCardHandler_WithSuccess_WhenReturnError()
+    public async Task AddCreditCardHandler_ReturnError_WhenIsInvalid()
     {
         var request = fixture.Create<AddCreditCardRequestDto>();
 

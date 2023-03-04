@@ -25,7 +25,7 @@ public class NumberCardValidatorTest : IDisposable
     }
 
     [Fact]
-    public void ValidateNumberCard_WithInvalid_WhenReturnTrue()
+    public void ValidateNumberCard_ReturnTrue_WhenValid()
     {
         var result = NumberCardValidator.Validate("5149450592914871");
 
@@ -33,9 +33,17 @@ public class NumberCardValidatorTest : IDisposable
     }
 
     [Fact]
-    public void ValidateNumberCard_WithValid_WhenReturnFalse()
+    public void ValidateNumberCard_ReturnFalse_WhenIsInValid()
     {
         var result = NumberCardValidator.Validate(Faker.Random.AlphaNumeric(10));
+
+        result.Should().BeFalse();
+    }
+
+    [Fact]
+    public void ValidateNumberCard_ReturnFalse_WhenIsNull()
+    {
+        var result = NumberCardValidator.Validate(null);
 
         result.Should().BeFalse();
     }

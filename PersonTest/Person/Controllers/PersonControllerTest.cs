@@ -33,7 +33,7 @@ public class PersonControllerTest : IDisposable
     }
 
     [Fact]
-    public async Task RegisterPerson_WithSuccess_WhenReturnCreated()
+    public async Task RegisterPerson_ReturnCreated_WhenSuccess()
     {
         var request = Fixture.Create<RegisterPersonRequestDto>();
         var response = Fixture.Create<RegisterPersonResponseDto>();
@@ -48,7 +48,7 @@ public class PersonControllerTest : IDisposable
     }
 
     [Fact]
-    public async Task DontRegisterPerson_WithBadRequest_WhenReturnNull()
+    public async Task DontRegisterPerson_ReturnError_WhenResponseIsNull()
     {
         var request = Fixture.Create<RegisterPersonRequestDto>();
         RegisterPersonResponseDto? response = null;
@@ -63,7 +63,7 @@ public class PersonControllerTest : IDisposable
     }
 
     [Fact]
-    public async Task AuthenticatePerson_WithSuccess_WhenReturnCreated()
+    public async Task AuthenticatePerson_ReturnOk_WhenSuccess()
     {
         var request = Fixture.Create<AuthenticatePersonRequestDto>();
 
@@ -77,7 +77,7 @@ public class PersonControllerTest : IDisposable
     }
 
     [Fact]
-    public async Task DontAuthenticatePerson_WithSuccess_WhenReturnUnauthorized()
+    public async Task AuthenticatePerson_ReturnError_WhenUnauthorized()
     {
         var request = Fixture.Create<AuthenticatePersonRequestDto>();
 
@@ -91,7 +91,7 @@ public class PersonControllerTest : IDisposable
     }
 
     [Fact]
-    public async Task AddCreditCard_WithSuccess_WhenReturnCreated()
+    public async Task AddCreditCard_ReturnCreated_WhenSuccess()
     {
         var request = Fixture.Create<AddCreditCardRequestDto>();
         var response = Fixture.Create<AddCreditCardResponseDto>();
@@ -106,7 +106,7 @@ public class PersonControllerTest : IDisposable
     }
 
     [Fact]
-    public async Task DontAddCreditCard_WithBadRequest_WhenReturnNull()
+    public async Task AddCreditCard_ReturnError_WhenResponseIsNull()
     {
         var request = Fixture.Create<AddCreditCardRequestDto>();
         AddCreditCardResponseDto? response = null;

@@ -39,7 +39,7 @@ public class AuthenticatePersonHandlerTest : IDisposable
     }
 
     [Fact]
-    public async Task AuthenticatePersonHandler_WithSuccess_WhenReturnTrue()
+    public async Task AuthenticatePersonHandler_ReturnTrue_WhenSuccess()
     {
         var request = fixture.Create<AuthenticatePersonRequestDto>();
 
@@ -55,7 +55,7 @@ public class AuthenticatePersonHandlerTest : IDisposable
     }
 
     [Fact]
-    public async Task DontAuthenticatePersonHandler_WithSuccess_WhenReturnFalse()
+    public async Task DontAuthenticatePersonHandler_ReturnFalse_WhenIsInvalid()
     {
         var request = fixture.Create<AuthenticatePersonRequestDto>();
 

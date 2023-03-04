@@ -11,7 +11,7 @@ public class NumberCardValidator
     public static bool Validate(string numberCard)
     {
         if (numberCard == null)
-            return true;
+            return false;
 
         numberCard = numberCard.Replace("-", "");
         numberCard = numberCard.Replace(" ", "");

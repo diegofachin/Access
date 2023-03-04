@@ -34,7 +34,7 @@ public class RegisterPersonHandlerTest : IDisposable
     }
 
     [Fact]
-    public async Task RegisterPersonHandler_WithSuccess_WhenReturnCreated()
+    public async Task RegisterPersonHandler_ReturnCreated_WhenSuccess()
     {
         var request = fixture.Create<RegisterPersonRequestDto>();
 
@@ -47,7 +47,7 @@ public class RegisterPersonHandlerTest : IDisposable
     }
 
     [Fact]
-    public async Task DontRegisterPersonHandler_WithSuccess_WhenReturnError()
+    public async Task DontRegisterPersonHandler_ReturnError_WhenIsInvalid()
     {
         var request = fixture.Create<RegisterPersonRequestDto>();
 

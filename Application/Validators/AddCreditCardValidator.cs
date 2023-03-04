@@ -2,9 +2,11 @@
 using Application.Handlers.AuthenticatePerson;
 using Domain.Validators;
 using FluentValidation;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Application.Validators;
 
+[ExcludeFromCodeCoverage]
 public class AddCreditCardValidator : AbstractValidator<AddCreditCardRequestDto>
 {
     public AddCreditCardValidator()

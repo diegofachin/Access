@@ -25,17 +25,21 @@ public class PasswordValidatorTest : IDisposable
     }
 
     [Fact]
-    public async Task ValidatePassword_WithValid_WhenReturnTrue()
+    public void ValidatePassword_ReturnTrue_WhenIsValid()
     {
         var result = PasswordValidator.Validate("Abb12345@");
 
         result.Should().BeTrue();
     }
 
-    [Fact]
-    public async Task ValidatePassword_WithInvalid_WhenReturnFalse()
+    [Theory]
+    [InlineData("Abb123@")]
+    [InlineData("abb1234@")]
+    [InlineData("AAB1234@")]
+    [InlineData("AAB 1234@")]
+    public void ValidatePassword_ReturnFalse_WhenIsInValid(string password)
     {
-        var result = PasswordValidator.Validate(Faker.Random.AlphaNumeric(7));
+        var result = PasswordValidator.Validate(password);
 
         result.Should().BeFalse();
     }
