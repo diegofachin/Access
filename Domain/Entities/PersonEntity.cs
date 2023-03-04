@@ -1,4 +1,5 @@
 ﻿using Application.Enums;
+using System.Collections.ObjectModel;
 
 namespace Domain.Entities;
 
@@ -19,4 +20,6 @@ public class PersonEntity : BaseEntity
     public string Complement { get; set; }
 
     public string Password { get; set; }
+
+    public Collection<CreditCardEntity> CreditCards { get; set; } = new Collection<CreditCardEntity>();
 }

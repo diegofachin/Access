@@ -12,6 +12,8 @@ public class PersonDbContext : DbContext
         
     }
 
+    public DbSet<CreditCardEntity> CreditCards { get; set; }
+
     public DbSet<PersonEntity> Persons { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
