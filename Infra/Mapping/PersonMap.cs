@@ -24,13 +24,14 @@ public class PersonMap : IEntityTypeConfiguration<PersonEntity>
             .IsRequired();
 
         builder
-            .Property(user => user.DateOfBirth)
-            .HasColumnType("Date")
+            .Property(user => user.Cpf)
+            .HasMaxLength(11)
             .IsRequired();
 
         builder
-            .Property(user => user.Gender)
-            .HasConversion(new EnumToStringConverter<Gender>());
+            .Property(user => user.DateOfBirth)
+            .HasColumnType("Date")
+            .IsRequired();
 
         builder
             .Property(user => user.Address)
