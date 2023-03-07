@@ -13,6 +13,7 @@ public class PersonMap : IEntityTypeConfiguration<PersonEntity>
     public void Configure(EntityTypeBuilder<PersonEntity> builder)
     {
         builder.HasKey(user => user.Id);
+        builder.HasAlternateKey(user => user.Cpf);
 
         builder
             .Property(user => user.Id)
@@ -25,7 +26,7 @@ public class PersonMap : IEntityTypeConfiguration<PersonEntity>
 
         builder
             .Property(user => user.Cpf)
-            .HasMaxLength(11)
+            .HasMaxLength(11)            
             .IsRequired();
 
         builder
