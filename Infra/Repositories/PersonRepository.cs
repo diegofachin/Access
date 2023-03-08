@@ -22,4 +22,10 @@ public class PersonRepository : GenericRepository<PersonEntity>, IPersonReposito
 
         return BCrypt.Net.BCrypt.Verify(password, person.Password);
     }
+
+    public async Task<PersonEntity> GetPersonByCpf(string cpf)
+    {
+        return await _context.Persons.FirstOrDefaultAsync(x => x.Cpf == cpf);
+    }
+
 }

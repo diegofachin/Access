@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Exceptions;
 using Domain.Interfaces;
 using MediatR;
 using System;
@@ -18,6 +19,12 @@ public class RegisterPersonHandler : IRequestHandler<RegisterPersonRequestDto, R
 
     public async Task<RegisterPersonResponseDto> Handle(RegisterPersonRequestDto request, CancellationToken cancellationToken)
     {
+        var personAlreadyExists = await _unitOfWork.PersonRepository.GetPersonByCpf(request.Cpf);
+        if (personAlreadyExists is not null)
+        {
+            throw new PersonAlreadyExistsException();
+        }
+
         PersonEntity person = new()
         {
             Name = request.Name,

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Domain.Exceptions;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Diagnostics.CodeAnalysis;
@@ -22,6 +23,18 @@ public class ExceptionFilter : IExceptionFilter
             {
                 StatusCode = (int)HttpStatusCode.BadRequest,
             };
+
+            return;
+        }
+
+        if (context.Exception is DomainException)
+        {
+            context.Result = new ObjectResult(new { Error = (context.Exception as DomainException).Message })
+            {
+                StatusCode = (int)HttpStatusCode.BadRequest,
+            };
+
+            return;
         }
     }
 }
